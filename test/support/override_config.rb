@@ -15,8 +15,9 @@ TEST_SRV_URI = URI.parse(ENV['TEST_SRV_URL'] || 'http://localhost:11090')
 TEST_APP_URI = URI.parse(ENV['TEST_APP_URL'] || 'druby://localhost:11091')
 TEST_LOG_FILE = 'testing.log'
 TEST_CONFIG_YML = File.expand_path(File.join(__FILE__, '../../../etc/config.yml.ci'))
-DaVaz.config.test_user = 'right@user.ch'
-DaVaz.config.test_password = 'abcd'
+DaVaz.config.test_user = 'juerg@davaz.com'
+DaVaz.config.test_password = ENV['TEST_PASSWORD'] || 'abcd'
+puts "Pw is #{DaVaz.config.test_password}"
 TEST_USER     = DaVaz.config.test_user
 TEST_PASSWORD = DaVaz.config.test_password
 DaVazUrl = TEST_SRV_URI.to_s

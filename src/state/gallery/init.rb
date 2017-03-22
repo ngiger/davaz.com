@@ -14,7 +14,7 @@ module DaVaz::State
         @model = OpenStruct.new
         artobject_id = @session.user_input(:artobject_id)
         serie_id     = @session.user_input(:serie_id)
-        serie  = @session.load_serie(serie_id)
+        serie  = @session.app.load_serie(serie_id)
         @model.artobjects = serie.artobjects
         @model.artobject  = @model.artobjects.find { |obj|
            obj.artobject_id.to_s == artobject_id
@@ -79,7 +79,7 @@ module DaVaz::State
         artobject_id = @session.user_input(:artobject_id)
         artgroup_id  = @session.user_input(:artgroup_id)
         serie_id     = @session.user_input(:serie_id)
-        serie = @session.load_serie(serie_id)
+        serie = @session.app.load_serie(serie_id)
         if serie
           serie.artobjects.each { |obj|
             next if artobject_id && obj.artobject_id != artobject_id

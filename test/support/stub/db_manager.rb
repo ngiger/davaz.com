@@ -353,6 +353,10 @@ module DaVaz::Stub
       @guests.unshift(guest)
     end
 
+    def load_oneliners
+      @oneliner
+    end
+
     def load_artgroups(order_by=nil)
       @artgroups
     end

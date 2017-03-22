@@ -366,9 +366,11 @@ module DaVaz::Util
     end
 
     def logout(yus_session=nil)
-      SBSM.info "@yus_server #{@yus_server.inspect} #{yus_session.class} #{yus_session.object_id} "
+      res = nil
       # + "#{session.class} #{session.object_id} state #{(session && session.respond_to?(:state)) ? session.state.object_id : 'nil'}"
-      @yus_server.logout(yus_session) if @yus_server
+      res = @yus_server.logout(yus_session) if @yus_server
+      SBSM.info "@yus_server #{@yus_server.inspect} #{yus_session.class} #{yus_session.object_id} #{res}"
+      res
     end
   end
 end

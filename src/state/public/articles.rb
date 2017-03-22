@@ -12,7 +12,7 @@ module DaVaz::State
 
       def init
         article_id = @session.user_input(:artobject_id)
-        @model = @session.load_article(article_id)
+        @model = @session.app.load_article(article_id)
       end
     end
 
@@ -20,7 +20,7 @@ module DaVaz::State
       VIEW = DaVaz::View::Public::Articles
 
       def init
-        @model = @session.load_articles
+        @model = @session.app.load_articles
       end
     end
 

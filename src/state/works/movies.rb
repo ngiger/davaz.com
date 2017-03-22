@@ -18,7 +18,7 @@ module DaVaz::State
       def init
         artobject_id = @session.user_input(:artobject_id)
         @model = OpenStruct.new
-        @model.artobjects = @session.load_movies
+        @model.artobjects = @session.app.load_movies
         @model.artobject  = @model.artobjects.find { |obj|
           obj.artobject_id.to_s == artobject_id
         }
@@ -61,18 +61,26 @@ module DaVaz::State
 
     class Movies < Global
       VIEW = DaVaz::View::Works::Movies
+      def initialize(session, model)
+        SBSM.debug('init Works::Movies')
+        super(session, model)
+      end
 
       def init
-        @model = @session.load_movies()
+        @model = @session.app.load_movies()
       end
     end
 
     # @api admin
     class AdminMovies < Global
       VIEW = DaVaz::View::Works::AdminMovies
+      def initialize(session, model)
+        SBSM.debug('init Works::AdminMovies')
+        super(session, model)
+      end
 
       def init
-        @model = @session.load_movies()
+        @model = @session.app.load_movies()
       end
 
       def ajax_upload_image

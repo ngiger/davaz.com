@@ -7,6 +7,7 @@ module DaVaz::State
     def login
       autologin(@session.login)
     rescue Yus::YusError
+      SBSM.debug("autologin Yus::YusErrors")
       model = {
         'success' => false,
         'message' => @session.lookandfeel.lookup(:e_incorrect_login),
@@ -18,7 +19,10 @@ module DaVaz::State
 
     def autologin(user)
       if user.valid? && user.allowed?('edit', 'com.davaz')
+        SBSM.debug("autologin as Admin for user #{user}")
         @session.active_state.extend(Admin)
+      else
+        SBSM.debug("user as normal user #{user}")
       end
       LoginStatus.new(@session, 'success' => true)
     end

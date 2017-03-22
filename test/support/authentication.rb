@@ -18,19 +18,28 @@ module DaVaz
       form.text_field(name: 'login_email').set(opts[:email])
       form.text_field(name: 'login_password').set(opts[:password])
       form.checkbox(name: 'remember_me').set
+      SBSM.info "Clicking submit in login form"
       form.button(name: 'login', type: 'submit').click
       sleep 0.5
+      SBSM.info "Submitted login via click"
 
       email_field = a_browser.text_field(name: "login_email")
       if email_field.exist? && email_field.visible?
+        binding.pry
         assert false, 'Could not log in. login_email-Field must no longer be present!'
       end
       login_link = a_browser.link(text: 'Login')
       # require 'pry'; binding.pry if login_link.exists? && login_link.visible?
       # after calling a_browser.goto(a_browser.links.find{|x| x.text.eql?('Guestbook')}.href)
       # the login_link removes
-      puts 'Did not check absence of login link'
-      # assert_equal(false, login_link.exists? && login_link.visible?, 'Could not log in. Login-link must no longer be present!')
+      #puts 'Did not check absence of login link'
+      if login_link.exists? && login_link.visible?
+        sleep 1
+        SBSM.info("Visiting photos")
+        a_browser.visit('/en/works/photos/')
+      end
+      binding.pry # if login_link.exists? && login_link.visible?
+      assert_equal(false, login_link.exists? && login_link.visible?, 'Could not log in. Login-link must no longer be present!')
     end
 
     def logout(a_browser = browser)

@@ -7,7 +7,7 @@ module DaVaz::State
       VIEW = DaVaz::View::Public::Exhibitions
 
       def init
-        @model = @session.load_exhibitions
+        @model = @session.app.load_exhibitions
       end
     end
 

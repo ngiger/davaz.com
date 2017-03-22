@@ -21,16 +21,16 @@ module DaVaz::State
         @model.artobjects = \
           @session.app.search_artobjects(query, artgroup_id)
       elsif serie_id
-        @model.artobjects = @session.load_serie(serie_id).artobjects
+        @model.artobjects = @session.app.load_serie(serie_id).artobjects
       elsif artgroup_id
-        @model.artobjects = @session.load_artgroup_artobjects(artgroup_id)
+        @model.artobjects = @session.app.load_artgroup_artobjects(artgroup_id)
       else
         @model.artobjects = []
       end
       object = @model.artobjects.find { |artobject|
         artobject.artobject_id == artobject_id
       }
-      if object.nil? && (object = @session.load_artobject(artobject_id))
+      if object.nil? && (object = @session.app.load_artobject(artobject_id))
         @model.artobjects.push(object)
       end
       @model.artobject = object

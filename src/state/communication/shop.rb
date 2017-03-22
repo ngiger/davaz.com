@@ -29,7 +29,7 @@ module DaVaz::State
             item.artobject_id == artobject_id
           }
           if items.empty?
-            new_item = @session.load_shop_item(artobject_id)
+            new_item = @session.app.load_shop_item(artobject_id)
             new_item.count = count
             @session[:cart_items].push(new_item)
           else
@@ -50,7 +50,7 @@ module DaVaz::State
         artobject_id = @session.user_input(:artobject_id)
         artgroup_id = @session.user_input(:artgroup_id)
         @model = OpenStruct.new
-        @model.artobjects = @session.load_artgroup_artobjects(artgroup_id)
+        @model.artobjects = @session.app.load_artgroup_artobjects(artgroup_id)
         @model.artobjects.delete_if { |artobject|
           artobject.price == '0' || \
           artobject.price == ''  || \
@@ -103,7 +103,7 @@ module DaVaz::State
           SBSM.info "deliver articles #{hash}"
           hash[:article].each { |artobject_id, count|
             unless count == ""
-              item = @session.load_shop_item(artobject_id)
+              item = @session.app.load_shop_item(artobject_id)
               item.count = count.to_i
             end
           }

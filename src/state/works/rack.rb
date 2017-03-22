@@ -12,7 +12,7 @@ module DaVaz::State
 
       def init
         @model = OpenStruct.new
-        series   = @session.app.load_series_by_artgroup(artgroup_id)
+        series   = @session.load_series_by_artgroup(artgroup_id)
         serie_id = @session.user_input(:serie_id)
         serie_id = series.first.serie_id if !serie_id || series.empty?
         @model.series   = series
@@ -25,7 +25,7 @@ module DaVaz::State
           'dataUrl'      => @session.lookandfeel.event_url(
             :gallery, :ajax_rack, [[:serie_id, serie_id]])
         }
-        serie = @session.app.load_serie(serie_id)
+        serie = @session.load_serie(serie_id)
         if serie
           serie_items = serie.artobjects
           serie_items.each { |item|
@@ -61,7 +61,7 @@ module DaVaz::State
             DaVaz::Util::ImageHelper.store_upload_image(
               string_io, artobject_id)
             @model = OpenStruct.new
-            @model.artobject = @session.app.load_artobject(artobject_id)
+            @model.artobject = @session.load_artobject(artobject_id)
           end
         end
       end
@@ -91,7 +91,7 @@ module DaVaz::State
       # @return state [SBSM::State]
       def update
         artobject_id = @session.user_input(:artobject_id)
-        @model.artobject = @session.app.load_artobject(artobject_id)
+        @model.artobject = @session.load_artobject(artobject_id)
         keys = %i{
           title artgroup_id serie_id serie_position tool_id material_id date
           country_id tags_to_s location form_language price size text url

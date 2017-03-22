@@ -92,10 +92,17 @@ module DaVaz::State
 
     def logout
       model = @previous.request_path
-      fragment = @session.user_input(:fragment)
-      model << "##{fragment}" unless fragment.empty?
-      model.gsub!(%r{new_art_object|ajax.*}, 'gallery')
-      Redirect.new(@session, model)
+      SBSM.info("request_path for #{@session.request_path} prev #{@previous.request_path}")
+      # binding.pry unless  @previous.request_path
+      if model
+        fragment = @session.user_input(:fragment)
+        model << "##{fragment}" unless fragment.empty?
+        model.gsub!(%r{new_art_object|ajax.*}, 'gallery')
+        Redirect.new(@session, model)
+      else
+        SBSM.info("No @previous.request_path for #{@session.request_path}")
+      end
+      model
     end
   end
 end

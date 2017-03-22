@@ -1,9 +1,7 @@
-GIT
-  remote: https://github.com/ngiger/sbsm.git
-  revision: d6b93ac24acda35f8731a6cade0758c2d893b38c
-  ref: d6b93ac24acda35f8731a6cade0758c2d893b38c
+PATH
+  remote: ../sbsm
   specs:
-    sbsm (1.3.6.pre.rc2)
+    sbsm (1.3.6.pre.rc3)
       chrono_logger
       hpricot
       mail
@@ -54,6 +52,8 @@ GEM
       byebug (~> 9.0)
       pry (~> 0.10)
     rack (2.0.1)
+    rack-test (0.6.3)
+      rack (>= 1.0)
     rake (12.0.0)
     rclconf (1.0.0)
     rmagick (2.15.4)
@@ -95,6 +95,7 @@ DEPENDENCIES
   odba (~> 1.1.0)
   pg (= 0.18.4)
   pry-byebug
+  rack-test
   rake
   rclconf (= 1.0.0)
   rmagick (~> 2.15.4)

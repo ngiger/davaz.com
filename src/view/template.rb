@@ -115,8 +115,9 @@ module DaVaz::View
       div.value = left_navigation(model)
       divs << div
       # dojo/back
-      self.onload = sprintf(
-        "back.setInitialState('%s');", @session.request_path)
+      string = sprintf("back.setInitialState('%s');", @session.request_path)
+      SBSM.info("onload #{string}")
+      self.onload = string
       divs
     end
 

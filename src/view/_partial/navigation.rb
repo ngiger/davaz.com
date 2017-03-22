@@ -24,6 +24,7 @@ module DaVaz::View
     def build_navigation
       @link_idx = 0
       @zone_links = @lookandfeel.send(self::class::NAV_METHOD)
+      SBSM.info "@link_idx #{@link_idx} #{self::class::NAV_METHOD} => #{@zone_links}"
       @zone_links.each_with_index { |ary, idx|
         pos = [idx * 2, 0]
         components.store(pos, :navigation_link)
@@ -61,6 +62,7 @@ module DaVaz::View
       url = @lookandfeel.event_url(:admin, :login_form)
       link.href = 'javascript:void(0)'
       link.set_attribute('onclick', "toggleLoginForm(this, '#{url}')")
+      SBSM.info "Adding view/_partial/navigation login_form"
       link
     end
 
@@ -69,6 +71,7 @@ module DaVaz::View
       link.set_attribute('onclick', 'logout(this);')
       link.href = @lookandfeel.event_url(:admin, :logout)
       link.css_class = 'foot-navigation'
+      SBSM.info "Adding view/_partial/navigation logout"
       link
     end
   end
